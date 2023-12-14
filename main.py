@@ -3,6 +3,10 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 
+def sizes_is_equal(*web_elements):
+    return len({tuple(e.size.values()) for e in web_elements}) == 1
+
+
 driver = webdriver.Chrome()
 driver.get("https://sbis.ru/")
 contacts = driver.find_element(By.LINK_TEXT, "Контакты")
@@ -19,6 +23,9 @@ block4_about = driver.find_element(By.XPATH, "//p[text()='Сила в людях
 assert block4_about.get_attribute("href") == "https://tensor.ru/about"
 driver.execute_script("arguments[0].click();", block4_about)    # ссылка делала мозг с обычным кликом
 
+# Секция "Работаем"
+block3_section = driver.find_element(By.XPATH, "//h2[text()='Работаем']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]")
+image_wrappers = block3_section.find_elements(By.XPATH, ".//img/..")
+assert sizes_is_equal(*image_wrappers)
 
 driver.close()
-
