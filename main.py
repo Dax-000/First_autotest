@@ -14,7 +14,7 @@ tensor.click()
 sleep(2.5)
 
 driver.switch_to.window(driver.window_handles[1])
-block4_text = driver.find_element(By.XPATH, "//p[text()='Сила в людях']")
+block4_section = driver.find_element(By.XPATH, "//p[text()='Сила в людях']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]")
 block4_about = driver.find_element(By.XPATH, "//p[text()='Сила в людях']//following::a[text()='Подробнее']")
 assert block4_about.get_attribute("href") == "https://tensor.ru/about"
 driver.execute_script("arguments[0].click();", block4_about)    # ссылка делала мозг с обычным кликом
