@@ -3,6 +3,9 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 
+UP_TO_SECTION = "ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]"
+
+
 def sizes_is_equal(*web_elements):
     return len({tuple(e.size.values()) for e in web_elements}) == 1
 
@@ -18,14 +21,13 @@ tensor.click()
 sleep(2.5)
 
 driver.switch_to.window(driver.window_handles[1])
-block4_section = driver.find_element(By.XPATH, "//p[text()='Сила в людях']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]")
+block4_section = driver.find_element(By.XPATH, f"//p[text()='Сила в людях']//{UP_TO_SECTION}")
 block4_about = driver.find_element(By.XPATH, "//p[text()='Сила в людях']//following::a[text()='Подробнее']")
 assert block4_about.get_attribute("href") == "https://tensor.ru/about"
 driver.execute_script("arguments[0].click();", block4_about)    # ссылка делала мозг с обычным кликом
 
 # Секция "Работаем"
-block3_section = driver.find_element(By.XPATH, "//h2[text()='Работаем']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]")
-image_wrappers = block3_section.find_elements(By.XPATH, ".//img/..")
+image_wrappers = driver.find_elements(By.XPATH, f"//h2[text()='Работаем']//{UP_TO_SECTION}//img/..")
 assert sizes_is_equal(*image_wrappers)
 
 driver.close()
