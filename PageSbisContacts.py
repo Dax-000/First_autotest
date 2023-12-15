@@ -6,6 +6,8 @@ class Locators:
     TENSOR = (By.XPATH, "//a[@title='tensor.ru']")
 
 
-class Navigator(BasePage):
+class SbisContacts(BasePage):
     def click_on_tensor(self):
-        return self.find_element(Locators.TENSOR).click()
+        tensor = self.click(self.find_element(Locators.TENSOR))
+        self.switch_window(-1)
+        return tensor

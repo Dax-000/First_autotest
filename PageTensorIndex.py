@@ -1,5 +1,6 @@
 from BaseApp import BasePage
 from selenium.webdriver.common.by import By
+from selenium.common import TimeoutException
 
 
 class Locators:
@@ -7,13 +8,13 @@ class Locators:
     SILA_ABOUT = (By.XPATH, "//p[text()='Сила в людях']//following::a[text()='Подробнее']")
 
 
-class Navigator(BasePage):
+class TensorIndex(BasePage):
     def check_sila_section(self):
         try:
             self.find_element(Locators.SILA_SECTION)
             return True
-        except:
+        except TimeoutException as _:
             return False
 
     def click_on_about(self):
-        return self.find_element(Locators.SILA_ABOUT).click()
+        return self.click(self.find_element(Locators.SILA_ABOUT))
