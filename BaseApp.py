@@ -18,3 +18,12 @@ class BasePage:
 
     def go_to_site(self, url):
         return self.driver.get(url)
+
+    def switch_window(self, index):
+        self.driver.switch_to.window(self.driver.window_handles[index])
+
+    def get_url(self):
+        return self.driver.current_url
+
+    def click(self, web_element):
+        self.driver.execute_script("arguments[0].click();", web_element)
