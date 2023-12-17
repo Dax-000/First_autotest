@@ -1,7 +1,7 @@
-from selenium.common import TimeoutException, WebDriverException
+from selenium.common import TimeoutException, WebDriverException, InvalidSelectorException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-import logging
+from time import sleep
 
 
 class BasePage:
@@ -16,18 +16,20 @@ class BasePage:
             web_element = WebDriverWait(self.driver, time).until(ec.presence_of_element_located(locator))
             self.logger.info(f"Find element by locator {locator}")
             return web_element
-        except TimeoutException as _:
+        except TimeoutException:
             self.logger.error(f"Can't find element by locator {locator}", exc_info=True)
-            return None
+        except InvalidSelectorException:
+            self.logger.error(f"Invalid locator {locator}")
 
     def find_elements(self, locator, time=2.5):
         try:
             web_elements = WebDriverWait(self.driver, time).until(ec.presence_of_all_elements_located(locator))
-            self.logger.info(f"Find elements by locator {locator}")
+            self.logger.info(f"Find {len(web_elements)} elements by locator {locator}")
             return web_elements
-        except TimeoutException as _:
+        except TimeoutException:
             self.logger.error(f"Can't find elements by locator {locator}", exc_info=True)
-            return None
+        except InvalidSelectorException:
+            self.logger.error(f"Invalid locator {locator}")
 
     def go_to_site(self, url):
         try:
@@ -47,5 +49,6 @@ class BasePage:
         try:
             self.driver.execute_script("arguments[0].click();", web_element)
             self.logger.info(f"Click on {web_element.id}")
+            sleep(2.5)
         except WebDriverException as _:
             self.logger.error(f"Can`t click on {web_element.id}", exc_info=True)

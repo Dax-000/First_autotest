@@ -20,4 +20,6 @@ def logger():
     formatter = logging.Formatter(FORMAT, DATEFMT)
     handler.setFormatter(formatter)
     logger.addHandler(handler)
+    logger.info("Begin session")
     yield logger
+    logger.info("End session")
