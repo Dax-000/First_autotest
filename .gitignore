@@ -2,3 +2,5 @@
 .idea
 venv
 .pytest_cache
+logs.log
+__pycache__
