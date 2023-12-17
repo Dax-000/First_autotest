@@ -19,4 +19,17 @@ def test_check_region_url(browser, logger):
     assert region == get_my_region()
 
 
-# def test_check_region_
+def test_check_partners(browser, logger):
+    sbis_contacts = SbisContacts(browser, logger)
+    assert sbis_contacts.get_partners_item_keys(1)
+
+
+def test_switch_region(browser, logger):
+    new_region = "Камчатский край"
+    sbis_contacts = SbisContacts(browser, logger)
+    old_partners = sbis_contacts.get_partners_item_keys(5)
+    region_code = sbis_contacts.change_region(new_region)
+    assert sbis_contacts.get_region() == new_region
+    assert sbis_contacts.get_partners_item_keys(5) != old_partners
+    url_region = int(sbis_contacts.get_url().split("/")[-1][:2])
+    assert url_region == region_code
