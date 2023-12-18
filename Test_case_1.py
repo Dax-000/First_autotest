@@ -1,7 +1,7 @@
-from PageSbisIndex import SbisIndex
-from PageSbisContacts import SbisContacts
-from PageTensorIndex import TensorIndex
-from PageTensorAbout import TensorAbout
+from pages.PageSbisIndex import SbisIndex
+from pages.PageSbisContacts import SbisContacts
+from pages.PageTensorIndex import TensorIndex
+from pages.PageTensorAbout import TensorAbout
 
 
 def test_go_to_contacts(browser, logger):

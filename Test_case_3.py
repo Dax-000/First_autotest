@@ -1,5 +1,5 @@
-from PageSbisDownloads import SbisDownloads
-from PageSbisIndex import SbisIndex
+from pages.PageSbisDownloads import SbisDownloads
+from pages.PageSbisIndex import SbisIndex
 from urllib.error import URLError
 import wget
 from os.path import getsize, join

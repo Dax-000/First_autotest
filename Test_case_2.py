@@ -1,5 +1,5 @@
-from PageSbisIndex import SbisIndex
-from PageSbisContacts import SbisContacts
+from pages.PageSbisIndex import SbisIndex
+from pages.PageSbisContacts import SbisContacts
 
 
 def get_my_region():
