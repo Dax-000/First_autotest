@@ -4,7 +4,7 @@ from selenium.common import TimeoutException
 
 
 class Locators:
-    SILA_SECTION = (By.XPATH, f"//p[text()='Сила в людях']//{BasePage.UP_TO_SECTION}")
+    SILA_SECTION = (By.XPATH, f"//p[text()='Сила в людях']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]")
     SILA_ABOUT = (By.XPATH, "//p[text()='Сила в людях']//following::a[text()='Подробнее']")
 
 

@@ -5,7 +5,6 @@ from time import sleep
 
 
 class BasePage:
-    UP_TO_SECTION = "ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]"
 
     def __init__(self, driver, logger):
         self.logger = logger

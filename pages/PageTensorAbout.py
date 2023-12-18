@@ -7,7 +7,7 @@ def sizes_is_equal(*web_elements):
 
 
 class Locators:
-    PAbOTAEM_IMAGE_WRAPPERS = (By.XPATH, f"//h2[text()='Работаем']//{BasePage.UP_TO_SECTION}//img/..")
+    PAbOTAEM_IMAGE_WRAPPERS = (By.XPATH, "//h2[text()='Работаем']//ancestor::div[contains(@class, 'tensor_ru-container tensor_ru-section')]//img/..")
 
 
 class TensorAbout(BasePage):
