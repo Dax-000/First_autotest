@@ -2,8 +2,8 @@ from pages.PageSbisDownloads import SbisDownloads
 from pages.PageSbisIndex import SbisIndex
 from urllib.error import URLError
 import wget
-from os.path import getsize, join
-from os import remove, listdir
+from os.path import getsize, join, exists
+from os import remove, listdir, makedirs
 
 
 def download_file(url, path, logger):
@@ -18,7 +18,9 @@ def download_file(url, path, logger):
         return file, error
 
 
-def clear_directory(dir):
+def refresh_directory(dir):
+    if not exists(dir):
+        makedirs(dir)
     for f in listdir(dir):
         remove(join(dir, f))
 
@@ -32,7 +34,7 @@ def test_go_to_downloads(browser, logger):
 
 def test_download_plugin(browser, logger):
     path = "downloads/"
-    clear_directory(path)
+    refresh_directory(path)
     sbis_download = SbisDownloads(browser, logger)
     sbis_download.click_on_tab_plugin()
     url, MBs = sbis_download.get_plugin_download_data()
